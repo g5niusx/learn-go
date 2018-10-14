@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"unsafe"
 )
 
@@ -28,4 +29,13 @@ func main() {
 	fmt.Println(name, &name)
 	fmt.Printf("类型%T转化为类型%T \n", int8Min, string(int8Min))
 	fmt.Println(fmt.Sprintf("int8类型的最小值是%d", int8Min))
+	var boolStr = "True"
+	b, _ := strconv.ParseBool(boolStr)
+	fmt.Printf("boolStr转化后类型 %T,%v \n", b, b)
+	var int8Str = "111"
+	i, _error := strconv.ParseInt(int8Str, 2, 4)
+	fmt.Printf("int8Str转化后类型 %T,%v 异常: %v \n", i, i, _error)
+	float32Str := "123.099"
+	f, _ := strconv.ParseFloat(float32Str, 64)
+	fmt.Printf("float32Str转化后类型 %T,%v \n", f, f)
 }
