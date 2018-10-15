@@ -18,9 +18,6 @@ func test(day int8) {
 	day--
 }
 
-/**
-
- */
 func sum(a int8, b int8) int8 {
 	return a + b
 }
