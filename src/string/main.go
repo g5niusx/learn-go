@@ -37,6 +37,30 @@ func main() {
 	source := "ceshiceshi"
 	target := "ce"
 	fmt.Printf("%s是否包含%s:%v \n", source, target, strings.Contains(source, target))
+
 	// 字符串里面包含多少个指定的字符串
 	fmt.Printf("%s包含%d个%s \n", source, strings.Count(source, target), target)
+
+	// 获取字符串在指定字符串第一次出现的位置
+	index := strings.Index(str, string(r[1]))
+	fmt.Printf("字符[我]出现在%v的位置是 %d \n", str, index)
+
+	// 将指定的字符串替换
+	replace := strings.Replace(str, "我", "|biezhi", -1)
+	fmt.Printf("%v替换后的结果是%v \n", str, replace)
+	str = "123,456,890"
+
+	// 将字符串按照指定字符分割为字符串数组
+	split := strings.Split(str, ",")
+	fmt.Printf("%v分割以后的数组是: %v \n", str, split)
+
+	// 将字符串大写
+	str = "upperCase"
+	upper := strings.ToUpper(str)
+	fmt.Printf("%v转换为大写以后为%v \n", str, upper)
+
+	// 去掉字符串首尾空格
+	str = " g5niusx\n"
+	space := strings.TrimSpace(str)
+	fmt.Printf("%v去掉首尾空格以后为%v \n", str, space)
 }
