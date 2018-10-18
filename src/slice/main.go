@@ -18,4 +18,30 @@ func main() {
 	//使用make来创建切片,第一个参数是切片的类型，第二个参数是切片的大小，第三个参数是切片的容量,切片的大小要小于等于切片的容量
 	var ints []int = make([]int, 2, 10)
 	fmt.Println(ints)
+	ints = append(ints, ints...)
+	fmt.Printf("切片被扩容为%v \n", ints)
+
+	// string底层是byte数组，可以做切片处理
+	name := "g5niusx"
+	s := name[1:]
+	fmt.Printf("字符串切片为:%v \n", s)
+
+	// 字符串转化为切片
+	r := []rune(name)
+	fmt.Printf("字符串转化为字节切片%v\n", r)
+	r[0] = '我'
+	fmt.Printf("字符串重组为:%v\n", string(r))
+
+	fmt.Printf("斐波那契数列:%v", fbn(1<<10))
+}
+
+// 斐波那契数列
+func fbn(num int) []uint64 {
+	slice := make([]uint64, num)
+	slice[0] = 1
+	slice[1] = 1
+	for i := 2; i < num; i++ {
+		slice[i] = slice[i-1] + slice[i-2]
+	}
+	return slice
 }
