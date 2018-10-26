@@ -6,10 +6,29 @@ import (
 )
 
 func main() {
-	var num int = 1
+	var num = 1
 	reflectTest(&num)
 	fmt.Printf("反射改变以后的值为:%v\n", num)
 	reflectStruct()
+
+	person := Person{Name: "g5niusx", age: 18}
+	reflectPerson := reflect.ValueOf(person)
+	typePerson := reflect.TypeOf(person)
+	// 获取到该实例有多少个属性
+	numField := reflectPerson.NumField()
+	fmt.Printf("%T有[%d]个字段\n", person, numField)
+	for i := 0; i < numField; i++ {
+		field := reflectPerson.Field(i)
+		jsonTag := typePerson.Field(i).Tag.Get("json")
+		fmt.Printf("%T第%d的字段值是:%v,jsonTag是%v\n", person, i, field, jsonTag)
+	}
+	// 获取该实例有多少个方法,私有的方法无法获取
+	numMethod := reflectPerson.NumMethod()
+	fmt.Printf("%T有[%d]个方法\n", person, numMethod)
+	reflectPerson.Method(1).Call(nil)
+	params := make([]reflect.Value, 1)
+	params[0] = reflect.ValueOf("golang")
+	reflectPerson.Method(0).Call(params)
 }
 
 func reflectTest(obj *int) {
@@ -38,6 +57,13 @@ func reflectStruct() {
 }
 
 type Person struct {
-	Name string
+	Name string `json:"name"`
 	age  uint
+}
+
+func (person Person) Say() {
+	fmt.Printf("%v说:我是大撒比!!\n", person.Name)
+}
+func (person Person) Program(language string) {
+	fmt.Printf("%v正在使用%v进行编程\n", person.Name, language)
 }
